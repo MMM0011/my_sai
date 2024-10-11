@@ -137,7 +137,8 @@ am_libsai_la_OBJECTS = stub_sai_fdb.lo stub_sai_interfacequery.lo \
 	stub_sai_neighbor.lo stub_sai_nexthop.lo \
 	stub_sai_nexthopgroup.lo stub_sai_port.lo stub_sai_route.lo \
 	stub_sai_router.lo stub_sai_switch.lo stub_sai_utils.lo \
-	stub_sai_vlan.lo stub_sai_rif.lo stub_sai_host_interface.lo
+	stub_sai_vlan.lo stub_sai_lag.lo stub_sai_rif.lo \
+	stub_sai_host_interface.lo
 libsai_la_OBJECTS = $(am_libsai_la_OBJECTS)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
@@ -164,7 +165,7 @@ am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/stub_sai_fdb.Plo \
 	./$(DEPDIR)/stub_sai_host_interface.Plo \
 	./$(DEPDIR)/stub_sai_interfacequery.Plo \
-	./$(DEPDIR)/stub_sai_neighbor.Plo \
+	./$(DEPDIR)/stub_sai_lag.Plo ./$(DEPDIR)/stub_sai_neighbor.Plo \
 	./$(DEPDIR)/stub_sai_nexthop.Plo \
 	./$(DEPDIR)/stub_sai_nexthopgroup.Plo \
 	./$(DEPDIR)/stub_sai_port.Plo ./$(DEPDIR)/stub_sai_rif.Plo \
@@ -217,14 +218,14 @@ am__define_uniq_tagged_files = \
   done | $(am__uniquify_input)`
 am__DIST_COMMON = $(srcdir)/Makefile.in $(top_srcdir)/config/depcomp
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} '/home/denys777/Desktop/PLV3/Sai/SAI/stub/config/missing' aclocal-1.16
+ACLOCAL = ${SHELL} '/home/denys777/Desktop/PLV3/Sai/My_sai/stub/config/missing' aclocal-1.16
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
 APP_LIB_PATH = /usr/local
 AR = ar
-AUTOCONF = ${SHELL} '/home/denys777/Desktop/PLV3/Sai/SAI/stub/config/missing' autoconf
-AUTOHEADER = ${SHELL} '/home/denys777/Desktop/PLV3/Sai/SAI/stub/config/missing' autoheader
-AUTOMAKE = ${SHELL} '/home/denys777/Desktop/PLV3/Sai/SAI/stub/config/missing' automake-1.16
+AUTOCONF = ${SHELL} '/home/denys777/Desktop/PLV3/Sai/My_sai/stub/config/missing' autoconf
+AUTOHEADER = ${SHELL} '/home/denys777/Desktop/PLV3/Sai/My_sai/stub/config/missing' autoheader
+AUTOMAKE = ${SHELL} '/home/denys777/Desktop/PLV3/Sai/My_sai/stub/config/missing' automake-1.16
 AWK = mawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
@@ -262,7 +263,7 @@ LN_S = ln -s
 LTLIBOBJS = 
 LT_SYS_LIBRARY_PATH = 
 MAINT = #
-MAKEINFO = ${SHELL} '/home/denys777/Desktop/PLV3/Sai/SAI/stub/config/missing' makeinfo
+MAKEINFO = ${SHELL} '/home/denys777/Desktop/PLV3/Sai/My_sai/stub/config/missing' makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /usr/bin/mkdir -p
 NM = /usr/bin/nm -B
@@ -287,10 +288,10 @@ STRIP = strip
 SXD_LIBS_PATH = /usr/local
 SX_COMPLIB_PATH = /usr/local
 VERSION = 3.0.0000
-abs_builddir = /home/denys777/Desktop/PLV3/Sai/SAI/stub/src
-abs_srcdir = /home/denys777/Desktop/PLV3/Sai/SAI/stub/src
-abs_top_builddir = /home/denys777/Desktop/PLV3/Sai/SAI/stub
-abs_top_srcdir = /home/denys777/Desktop/PLV3/Sai/SAI/stub
+abs_builddir = /home/denys777/Desktop/PLV3/Sai/My_sai/stub/src
+abs_srcdir = /home/denys777/Desktop/PLV3/Sai/My_sai/stub/src
+abs_top_builddir = /home/denys777/Desktop/PLV3/Sai/My_sai/stub
+abs_top_srcdir = /home/denys777/Desktop/PLV3/Sai/My_sai/stub
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_DUMPBIN = 
@@ -319,7 +320,7 @@ host_vendor = pc
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/denys777/Desktop/PLV3/Sai/SAI/stub/config/install-sh
+install_sh = ${SHELL} /home/denys777/Desktop/PLV3/Sai/My_sai/stub/config/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -359,6 +360,7 @@ libsai_la_SOURCES = \
                        stub_sai_switch.c \
                        stub_sai_utils.c \
                        stub_sai_vlan.c \
+                       stub_sai_lag.c \
                        stub_sai_rif.c \
                        stub_sai_host_interface.c
 
@@ -448,6 +450,7 @@ distclean-compile:
 include ./$(DEPDIR)/stub_sai_fdb.Plo # am--include-marker
 include ./$(DEPDIR)/stub_sai_host_interface.Plo # am--include-marker
 include ./$(DEPDIR)/stub_sai_interfacequery.Plo # am--include-marker
+include ./$(DEPDIR)/stub_sai_lag.Plo # am--include-marker
 include ./$(DEPDIR)/stub_sai_neighbor.Plo # am--include-marker
 include ./$(DEPDIR)/stub_sai_nexthop.Plo # am--include-marker
 include ./$(DEPDIR)/stub_sai_nexthopgroup.Plo # am--include-marker
@@ -643,6 +646,7 @@ distclean: distclean-am
 		-rm -f ./$(DEPDIR)/stub_sai_fdb.Plo
 	-rm -f ./$(DEPDIR)/stub_sai_host_interface.Plo
 	-rm -f ./$(DEPDIR)/stub_sai_interfacequery.Plo
+	-rm -f ./$(DEPDIR)/stub_sai_lag.Plo
 	-rm -f ./$(DEPDIR)/stub_sai_neighbor.Plo
 	-rm -f ./$(DEPDIR)/stub_sai_nexthop.Plo
 	-rm -f ./$(DEPDIR)/stub_sai_nexthopgroup.Plo
@@ -701,6 +705,7 @@ maintainer-clean: maintainer-clean-am
 		-rm -f ./$(DEPDIR)/stub_sai_fdb.Plo
 	-rm -f ./$(DEPDIR)/stub_sai_host_interface.Plo
 	-rm -f ./$(DEPDIR)/stub_sai_interfacequery.Plo
+	-rm -f ./$(DEPDIR)/stub_sai_lag.Plo
 	-rm -f ./$(DEPDIR)/stub_sai_neighbor.Plo
 	-rm -f ./$(DEPDIR)/stub_sai_nexthop.Plo
 	-rm -f ./$(DEPDIR)/stub_sai_nexthopgroup.Plo
