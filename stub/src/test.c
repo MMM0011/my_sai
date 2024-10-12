@@ -56,11 +56,11 @@ int main()
     // status = sai_api_uninitialize();
 
 
-        sai_status_t          status;
+    sai_status_t          status;
     sai_lag_api_t        *lag_api;
     sai_object_id_t       lag_oid1, lag_oid2;
     sai_object_id_t       lag_member_oid1, lag_member_oid2, lag_member_oid3, lag_member_oid4;
-    sai_object_id_t       port1 = 1, port2 = 2, port3 = 3, port4 = 4;
+    sai_object_id_t           port_list[64];
 
     // Initialize SAI
     status = sai_api_initialize(0, &test_services);
@@ -82,19 +82,19 @@ int main()
         return 1;
     }
 
-    sai_attribute_t attr[2];
-    attr[0].id = SAI_LAG_MEMBER_ATTR_LAG_ID;
-    attr[0].value.oid = lag_oid1;
-    attr[1].id = SAI_LAG_MEMBER_ATTR_PORT_ID;
-    attr[1].value.oid = port1;
-    status = lag_api->create_lag_member(&lag_member_oid1, 2, attr);
+    sai_attribute_t attrs[2];
+    attrs[0].id = SAI_LAG_MEMBER_ATTR_LAG_ID;
+    attrs[0].value.oid = lag_oid1;
+    attrs[1].id = SAI_LAG_MEMBER_ATTR_PORT_ID;
+    attrs[1].value.oid = port_list[0];
+    status = lag_api->create_lag_member(&lag_member_oid1, 2, attrs);
     if (status != SAI_STATUS_SUCCESS) {
         printf("Failed to create LAG_MEMBER#1, status=%d\n", status);
         return 1;
     }
 
-    attr[1].value.oid = port2;
-    status = lag_api->create_lag_member(&lag_member_oid2, 2, attr);
+    attrs[1].value.oid = port_list[1];
+    status = lag_api->create_lag_member(&lag_member_oid2, 2, attrs);
     if (status != SAI_STATUS_SUCCESS) {
         printf("Failed to create LAG_MEMBER#2, status=%d\n", status);
         return 1;
@@ -106,16 +106,16 @@ int main()
         return 1;
     }
 
-    attr[0].value.oid = lag_oid2;
-    attr[1].value.oid = port3;
-    status = lag_api->create_lag_member(&lag_member_oid3, 2, attr);
+    attrs[0].value.oid = lag_oid2;
+    attrs[1].value.oid = port_list[2];
+    status = lag_api->create_lag_member(&lag_member_oid3, 2, attrs);
     if (status != SAI_STATUS_SUCCESS) {
         printf("Failed to create LAG_MEMBER#3, status=%d\n", status);
         return 1;
     }
 
-    attr[1].value.oid = port4;
-    status = lag_api->create_lag_member(&lag_member_oid4, 2, attr);
+    attrs[1].value.oid = port_list[3];
+    status = lag_api->create_lag_member(&lag_member_oid4, 2, attrs);
     if (status != SAI_STATUS_SUCCESS) {
         printf("Failed to create LAG_MEMBER#4, status=%d\n", status);
         return 1;
